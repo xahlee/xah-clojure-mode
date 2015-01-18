@@ -923,8 +923,12 @@ If there's a text selection, act on the region, else, on defun block."
   (do )
 )" nil :system t )
 
+("def" " (def NAME▮ VALUE)" nil :system t )
 ("when" " (when ▮ )" nil :system t )
+("do" " (do ▮)" nil :system t )
 ("recur" " (recur ▮ )" nil :system t )
+("str" " (str x &▮ )" nil :system t )
+("pr" " (pr x &▮ )" nil :system t )
 
 )
 
@@ -1021,15 +1025,25 @@ If there's a text selection, act on the region, else, on defun block."
   (setq xcj-keymap (make-sparse-keymap))
   (define-key xcj-keymap (kbd "<tab>") 'xcj-complete-or-indent)
 
-  (define-key xcj-keymap (kbd "<menu> e u") 'xcj-add-paren-around-symbol)
+  (define-prefix-command 'xcj-single-keys-keymap)
+  (define-key xcj-keymap (kbd "<menu> e") xcj-single-keys-keymap)
 
-  (define-key xcj-keymap (kbd "<menu> e t") 'xcj-prettify-root-sexp)
-  (define-key xcj-keymap (kbd "<menu> e h") 'xcj-remove-paren-pair)
+  (define-key xcj-single-keys-keymap (kbd "u") 'xcj-add-paren-around-symbol)
 
-  (define-key xcj-keymap (kbd "<menu> e p") 'xcj-compact-parens)
-  (define-key xcj-keymap (kbd "<menu> e c") 'xcj-complete-symbol)
+  (define-key xcj-single-keys-keymap (kbd "t") 'xcj-prettify-root-sexp)
+  (define-key xcj-single-keys-keymap (kbd "h") 'xcj-remove-paren-pair)
 
-  (define-key xcj-keymap (kbd "<menu> e e") 'xcj-expand-abbrev-maybe))
+  (define-key xcj-single-keys-keymap (kbd "p") 'xcj-compact-parens)
+  (define-key xcj-single-keys-keymap (kbd "c") 'xcj-complete-symbol)
+
+  (define-key xcj-single-keys-keymap (kbd "e") 'xcj-expand-abbrev-maybe)
+
+  (define-key xcj-single-keys-keymap (kbd "w .") 'cider-eval-buffer)
+  (define-key xcj-single-keys-keymap (kbd "w e") 'cider-eval-defun-at-point)
+  (define-key xcj-single-keys-keymap (kbd "w m") 'cider-eval-last-sexp)
+  (define-key xcj-single-keys-keymap (kbd "w u") 'cider-eval-region)
+
+)
 
 
 
