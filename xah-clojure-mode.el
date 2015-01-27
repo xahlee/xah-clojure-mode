@@ -923,12 +923,14 @@ If there's a text selection, act on the region, else, on defun block."
   (do )
 )" nil :system t )
 
-("def" " (def NAME▮ VALUE)" nil :system t )
-("when" " (when ▮ )" nil :system t )
-("do" " (do ▮)" nil :system t )
-("recur" " (recur ▮ )" nil :system t )
-("str" " (str x &▮ )" nil :system t )
-("pr" " (pr x &▮ )" nil :system t )
+("def" "(def NAME▮ VALUE)" nil :system t )
+("when" "(when ▮ )" nil :system t )
+("do" "(do ▮)" nil :system t )
+("recur" "(recur ▮ )" nil :system t )
+("str" "(str x &▮ )" nil :system t )
+("pr" "(pr x &▮ )" nil :system t )
+("sort" "(sort comp▮❓ coll )" nil :system t )
+("sort-by" "(sort keyfu▮❓ comp❓ coll )" nil :system t )
 
 )
 
@@ -1078,7 +1080,7 @@ URL `http://ergoemacs.github.io/ergoemacs-mode/'
   (use-local-map xcj-keymap)
   (setq local-abbrev-table xcj-abbrev-table)
 
-  (setq-local comment-start ";")
+  (setq-local comment-start "; ")
   (setq-local comment-end "")
   (setq-local comment-start-skip ";+ *")
   (setq-local comment-add 1) ;default to `;;' in comment-region
