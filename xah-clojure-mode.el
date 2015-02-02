@@ -687,10 +687,7 @@ See
  `backward-up-list',
  `up-list'"
   (interactive)
-  (if (or
-       (and (>= emacs-major-version 24)
-            (>= emacs-minor-version 4))
-       (>= emacs-major-version 25))
+  (if (>= emacs-major-version 25)
       (up-list arg1 arg2 arg3)
     (up-list arg1)))
 
