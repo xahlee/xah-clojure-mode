@@ -1022,7 +1022,7 @@ If there's a text selection, act on the region, else, on defun block."
 (defvar xcj-keymap nil "Keybinding for `xah-clojure-mode'")
 (progn
   (setq xcj-keymap (make-sparse-keymap))
-  (define-key xcj-keymap (kbd "<tab>") 'xcj-complete-or-indent)
+  (define-key xcj-keymap (kbd "TAB") 'xcj-complete-or-indent)
 
   (define-prefix-command 'xcj-single-keys-keymap)
   (define-key xcj-keymap (kbd "<menu> e") xcj-single-keys-keymap)
