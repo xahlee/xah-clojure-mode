@@ -1096,6 +1096,7 @@ URL `http://ergoemacs.github.io/ergoemacs-mode/'
       (add-to-list 'ac-modes 'xah-clojure-mode)))
   ;; (add-hook 'xah-clojure-mode-hook 'ac-emacs-lisp-mode-setup)
 
+  (make-local-variable abbrev-expand-function)
   (if (or
        (and (>= emacs-major-version 24)
             (>= emacs-minor-version 4))
