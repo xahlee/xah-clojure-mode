@@ -17,7 +17,7 @@
 ;;; Commentary:
 ;; Major mode for editing clojure.
 ;; See: http://ergoemacs.org/emacs/xah-clojure-mode.html
-   
+
 ;;; History:
 ;; version 0.1, 2014-10-31 first version
 
@@ -1025,7 +1025,6 @@ If there's a text selection, act on the region, else, on defun block."
   (define-key xcj-keymap (kbd "TAB") 'xcj-complete-or-indent)
 
   (define-prefix-command 'xcj-single-keys-keymap)
-  (define-key xcj-keymap (kbd "<menu> e") xcj-single-keys-keymap)
 
   (define-key xcj-single-keys-keymap (kbd "u") 'xcj-add-paren-around-symbol)
 
@@ -1042,7 +1041,7 @@ If there's a text selection, act on the region, else, on defun block."
   (define-key xcj-single-keys-keymap (kbd "w m") 'cider-eval-last-sexp)
   (define-key xcj-single-keys-keymap (kbd "w u") 'cider-eval-region)
 
-)
+  )
 
 
 
@@ -1074,8 +1073,14 @@ URL `http://ergoemacs.github.io/ergoemacs-mode/'
   (setq font-lock-defaults '((xcj-font-lock-keywords)))
 
   (set-syntax-table xcj-syntax-table)
-  (use-local-map xcj-keymap)
   (setq local-abbrev-table xcj-abbrev-table)
+
+  (if (or
+       (not (boundp 'xfk-major-mode-lead-key))
+       (null 'xfk-major-mode-lead-key))
+      (define-key xcj-keymap (kbd "<menu> e") xcj-single-keys-keymap)
+    (define-key xcj-keymap xfk-major-mode-lead-key xcj-single-keys-keymap))
+  (use-local-map xcj-keymap)
 
   (setq-local comment-start "; ")
   (setq-local comment-end "")
