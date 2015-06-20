@@ -27,8 +27,8 @@
 
 (defvar xah-clojure-mode-hook nil "Standard hook for `xah-clojure-mode'")
 
-(defvar xcj-clojure-basic-words nil "list of clojure words.")
-(setq xcj-clojure-basic-words
+(defvar xah-clojure-clojure-basic-words nil "list of clojure words.")
+(setq xah-clojure-clojure-basic-words
       '(
 
 "="
@@ -61,8 +61,8 @@
 
         ))
 
-(defvar xcj-clojure.core-words nil "list of clojure.core words.")
-(setq xcj-clojure.core-words
+(defvar xah-clojure-clojure.core-words nil "list of clojure.core words.")
+(setq xah-clojure-clojure.core-words
       '(
 
 "&" "*" "*'" "*1" "*2" "*3" "*agent*" "*allow-unresolved-vars*"
@@ -178,8 +178,8 @@
 
         ))
 
-(defvar xcj-clojure.data-words nil "list of clojure.core words.")
-(setq xcj-clojure.data-words
+(defvar xah-clojure-clojure.data-words nil "list of clojure.core words.")
+(setq xah-clojure-clojure.data-words
       '(
 
 "diff"
@@ -190,16 +190,16 @@
 
         ))
 
-(defvar xcj-clojure.edn-words nil "list of clojure.core words.")
-(setq xcj-clojure.edn-words
+(defvar xah-clojure-clojure.edn-words nil "list of clojure.core words.")
+(setq xah-clojure-clojure.edn-words
       '(
 "read"
 "read-string"
 
         ))
 
-(defvar xcj-clojure.inspector-words nil "list of clojure.core words.")
-(setq xcj-clojure.inspector-words
+(defvar xah-clojure-clojure.inspector-words nil "list of clojure.core words.")
+(setq xah-clojure-clojure.inspector-words
       '(
 
 "inspect"
@@ -208,8 +208,8 @@
 
         ))
 
-(defvar xcj-clojure.instant-words nil "list of clojure.core words.")
-(setq xcj-clojure.instant-words
+(defvar xah-clojure-clojure.instant-words nil "list of clojure.core words.")
+(setq xah-clojure-clojure.instant-words
       '(
 "parse-timestamp"
 "read-instant-calendar"
@@ -219,14 +219,14 @@
 
         ))
 
-(defvar xcj-clojure.java.browse-words nil "list of clojure.core words.")
-(setq xcj-clojure.java.browse-words
+(defvar xah-clojure-clojure.java.browse-words nil "list of clojure.core words.")
+(setq xah-clojure-clojure.java.browse-words
       '(
 "browse-url"
         ))
 
-(defvar xcj-clojure.java.io-words nil "list of clojure.core words.")
-(setq xcj-clojure.java.io-words
+(defvar xah-clojure-clojure.java.io-words nil "list of clojure.core words.")
+(setq xah-clojure-clojure.java.io-words
       '(
 "as-file"
 "as-relative-path"
@@ -249,8 +249,8 @@
 
         ))
 
-(defvar xcj-clojure.java.javadoc-words nil "list of clojure.core words.")
-(setq xcj-clojure.java.javadoc-words
+(defvar xah-clojure-clojure.java.javadoc-words nil "list of clojure.core words.")
+(setq xah-clojure-clojure.java.javadoc-words
       '(
 "add-local-javadoc"
 "add-remote-javadoc"
@@ -258,8 +258,8 @@
 
         ))
 
-(defvar xcj-clojure.java.shell-words nil "list of clojure.core words.")
-(setq xcj-clojure.java.shell-words
+(defvar xah-clojure-clojure.java.shell-words nil "list of clojure.core words.")
+(setq xah-clojure-clojure.java.shell-words
       '(
   "sh"
 "with-sh-dir"
@@ -267,8 +267,8 @@
 
         ))
 
-(defvar xcj-clojure.main-words nil "list of clojure.core words.")
-(setq xcj-clojure.main-words
+(defvar xah-clojure-clojure.main-words nil "list of clojure.core words.")
+(setq xah-clojure-clojure.main-words
       '(
 "demunge"
 "load-script"
@@ -288,8 +288,8 @@
 
         ))
 
-(defvar xcj-clojure.pprint-words nil "list of clojure.core words.")
-(setq xcj-clojure.pprint-words
+(defvar xah-clojure-clojure.pprint-words nil "list of clojure.core words.")
+(setq xah-clojure-clojure.pprint-words
       '(
 
 "*print-base*"
@@ -321,8 +321,8 @@
 
         ))
 
-(defvar xcj-clojure.reflect-words nil "list of clojure.core words.")
-(setq xcj-clojure.reflect-words
+(defvar xah-clojure-clojure.reflect-words nil "list of clojure.core words.")
+(setq xah-clojure-clojure.reflect-words
       '(
 "->AsmReflector"
 "->Constructor"
@@ -349,8 +349,8 @@
 
         ))
 
-(defvar xcj-clojure.repl-words nil "list of clojure.core words.")
-(setq xcj-clojure.repl-words
+(defvar xah-clojure-clojure.repl-words nil "list of clojure.core words.")
+(setq xah-clojure-clojure.repl-words
       '(
 "apropos"
 "demunge"
@@ -368,8 +368,8 @@
 
         ))
 
-(defvar xcj-clojure.set-words nil "list of clojure.core words.")
-(setq xcj-clojure.set-words
+(defvar xah-clojure-clojure.set-words nil "list of clojure.core words.")
+(setq xah-clojure-clojure.set-words
       '(
 "difference"
 "index"
@@ -386,8 +386,8 @@
 
         ))
 
-(defvar xcj-clojure.stacktrace-words nil "list of clojure.core words.")
-(setq xcj-clojure.stacktrace-words
+(defvar xah-clojure-clojure.stacktrace-words nil "list of clojure.core words.")
+(setq xah-clojure-clojure.stacktrace-words
       '(
 "e"
 "print-cause-trace"
@@ -397,8 +397,8 @@
 "root-cause"
         ))
 
-(defvar xcj-clojure.string-words nil "list of clojure.core words.")
-(setq xcj-clojure.string-words
+(defvar xah-clojure-clojure.string-words nil "list of clojure.core words.")
+(setq xah-clojure-clojure.string-words
       '(
 "blank?"
 "capitalize"
@@ -418,15 +418,15 @@
 "upper-case"
         ))
 
-(defvar xcj-clojure.template-words nil "list of clojure.core words.")
-(setq xcj-clojure.template-words
+(defvar xah-clojure-clojure.template-words nil "list of clojure.core words.")
+(setq xah-clojure-clojure.template-words
       '(
 "apply-template"
 "do-template"
         ))
 
-(defvar xcj-clojure.test-words nil "list of clojure.core words.")
-(setq xcj-clojure.test-words
+(defvar xah-clojure-clojure.test-words nil "list of clojure.core words.")
+(setq xah-clojure-clojure.test-words
       '(
 "*load-tests*"
 "*stack-trace-depth*"
@@ -461,8 +461,8 @@
 "with-test-out"
         ))
 
-(defvar xcj-clojure.walk-words nil "list of clojure.core words.")
-(setq xcj-clojure.walk-words
+(defvar xah-clojure-clojure.walk-words nil "list of clojure.core words.")
+(setq xah-clojure-clojure.walk-words
       '(
 "keywordize-keys"
 "macroexpand-all"
@@ -476,14 +476,14 @@
 "walk"
         ))
 
-(defvar xcj-clojure.xml-words nil "list of clojure.core words.")
-(setq xcj-clojure.xml-words
+(defvar xah-clojure-clojure.xml-words nil "list of clojure.core words.")
+(setq xah-clojure-clojure.xml-words
       '(
 "parse"
         ))
 
-(defvar xcj-clojure.zip-words nil "list of clojure.core words.")
-(setq xcj-clojure.zip-words
+(defvar xah-clojure-clojure.zip-words nil "list of clojure.core words.")
+(setq xah-clojure-clojure.zip-words
       '(
 "append-child"
 "branch?"
@@ -515,8 +515,8 @@
 "zipper"
         ))
 
-(defvar xcj-clojure-fun-words nil "list of clojure.core words.")
-(setq xcj-clojure-fun-words
+(defvar xah-clojure-clojure-fun-words nil "list of clojure.core words.")
+(setq xah-clojure-clojure-fun-words
       '(
 
 ;; clojure.inspector
@@ -645,34 +645,34 @@
         "up"
         ))
 
-(defvar xcj-clojure-all-keywords nil "list of all clojure keywords")
-(setq xcj-clojure-all-keywords
+(defvar xah-clojure-clojure-all-keywords nil "list of all clojure keywords")
+(setq xah-clojure-clojure-all-keywords
 (append
-xcj-clojure-fun-words
-xcj-clojure-basic-words
-xcj-clojure-basic-words
-xcj-clojure.core-words
-xcj-clojure.data-words
-xcj-clojure.edn-words
-xcj-clojure.inspector-words
-xcj-clojure.instant-words
-xcj-clojure.java.browse-words
-xcj-clojure.java.io-words
-xcj-clojure.java.javadoc-words
-xcj-clojure.java.shell-words
-xcj-clojure.main-words
-xcj-clojure.pprint-words
-xcj-clojure.reflect-words
-xcj-clojure.repl-words
-xcj-clojure.set-words
-xcj-clojure.stacktrace-words
-xcj-clojure.string-words
-xcj-clojure.template-words
-xcj-clojure.test-words
-xcj-clojure.walk-words
-xcj-clojure.xml-words
-xcj-clojure.zip-words
-xcj-clojure-fun-words
+xah-clojure-clojure-fun-words
+xah-clojure-clojure-basic-words
+xah-clojure-clojure-basic-words
+xah-clojure-clojure.core-words
+xah-clojure-clojure.data-words
+xah-clojure-clojure.edn-words
+xah-clojure-clojure.inspector-words
+xah-clojure-clojure.instant-words
+xah-clojure-clojure.java.browse-words
+xah-clojure-clojure.java.io-words
+xah-clojure-clojure.java.javadoc-words
+xah-clojure-clojure.java.shell-words
+xah-clojure-clojure.main-words
+xah-clojure-clojure.pprint-words
+xah-clojure-clojure.reflect-words
+xah-clojure-clojure.repl-words
+xah-clojure-clojure.set-words
+xah-clojure-clojure.stacktrace-words
+xah-clojure-clojure.string-words
+xah-clojure-clojure.template-words
+xah-clojure-clojure.test-words
+xah-clojure-clojure.walk-words
+xah-clojure-clojure.xml-words
+xah-clojure-clojure.zip-words
+xah-clojure-clojure-fun-words
 
 ))
 
@@ -680,7 +680,7 @@ xcj-clojure-fun-words
 
 ;; emacs 24.4 or 24.3 change fix
 
-(defun xcj-up-list (arg1 &optional arg2 arg3)
+(defun xah-clojure-up-list (arg1 &optional arg2 arg3)
   "Backward compatibility fix for emacs 24.4's up-list.
 emacs 24.4 changed up-list to take up to 3 args. Before, only 1.
 See
@@ -694,7 +694,7 @@ See
 
 ;; completion
 
-(defun xcj-complete-symbol ()
+(defun xah-clojure-complete-symbol ()
   "Perform keyword completion on current word.
 This uses `ido-mode' user interface for completion."
   (interactive)
@@ -709,18 +709,18 @@ This uses `ido-mode' user interface for completion."
          ξresult-sym)
     (when (not ξcurrent-sym) (setq ξcurrent-sym ""))
     (setq ξresult-sym
-          (ido-completing-read "" xcj-clojure-all-keywords nil nil ξcurrent-sym ))
+          (ido-completing-read "" xah-clojure-clojure-all-keywords nil nil ξcurrent-sym ))
     (delete-region ξp1 ξp2)
     (insert ξresult-sym)
 
     ;; use case of completion
 
-    (when (not (xcj-start-with-left-paren-p))
-      (let ( (ξabbrev-expanded-p (xcj-expand-abbrev)))
-        ;; (when (not (xcj-start-with-left-paren-p)) (xcj-add-paren-around-symbol))
+    (when (not (xah-clojure-start-with-left-paren-p))
+      (let ( (ξabbrev-expanded-p (xah-clojure-expand-abbrev)))
+        ;; (when (not (xah-clojure-start-with-left-paren-p)) (xah-clojure-add-paren-around-symbol))
 ))))
 
-(defun xcj-start-with-left-paren-p ()
+(defun xah-clojure-start-with-left-paren-p ()
   "true or false"
   (interactive)
   (save-excursion
@@ -729,7 +729,7 @@ This uses `ido-mode' user interface for completion."
       t
       nil)))
 
-(defun xcj-add-paren-around-symbol ()
+(defun xah-clojure-add-paren-around-symbol ()
   "add paren around symbol before cursor and add a space before closing paren, place cursor ther.
  ⁖
  do-something▮
@@ -740,7 +740,7 @@ becomes
   (forward-symbol -1) (insert "(") (forward-symbol 1) (insert " )")
   (backward-char 1))
 
-(defun xcj-remove-paren-pair ()
+(defun xah-clojure-remove-paren-pair ()
   "Remove closest outer paren around cursor or remove string quote and activate the region.
 Cursor is moved to the left deleted paren spot, mark is set to the right deleted paren spot.
 Call `exchange-point-and-mark' to highlight them.
@@ -751,9 +751,9 @@ Call `exchange-point-and-mark' to highlight them.
         p1 p2
         )
     (atomic-change-group
-      (xcj-up-list -1 "ESCAPE-STRINGS" "NO-SYNTAX-CROSSING")
+      (xah-clojure-up-list -1 "ESCAPE-STRINGS" "NO-SYNTAX-CROSSING")
       (while (not (char-equal (char-after) ?\( ))
-        (xcj-up-list -1 "ESCAPE-STRINGS" "NO-SYNTAX-CROSSING"))
+        (xah-clojure-up-list -1 "ESCAPE-STRINGS" "NO-SYNTAX-CROSSING"))
       (setq p1 (point))
       (forward-sexp)
       (setq p2 (point))
@@ -762,7 +762,7 @@ Call `exchange-point-and-mark' to highlight them.
       (goto-char p1)
       (delete-char 1))))
 
-(defun xcj-expand-abbrev-maybe (&optional φexpand-func)
+(defun xah-clojure-expand-abbrev-maybe (&optional φexpand-func)
   "Expand clojure function name before cursor into template.
 Right now, always expand.
 Used to be: Don't expand when in string or comment.
@@ -774,13 +774,13 @@ Returns true if there's a expansion, else false."
         (ξsyntax-state (syntax-ppss)))
     ;; (if (or (nth 3 ξsyntax-state) (nth 4 ξsyntax-state))
     ;;     nil
-    ;;   (xcj-expand-abbrev))
-    (xcj-expand-abbrev)
+    ;;   (xah-clojure-expand-abbrev))
+    (xah-clojure-expand-abbrev)
     ))
 
-(put 'xcj-expand-abbrev-maybe 'no-self-insert t)
+(put 'xah-clojure-expand-abbrev-maybe 'no-self-insert t)
 
-(defun xcj-expand-abbrev ()
+(defun xah-clojure-expand-abbrev ()
   "Expand the symbol before cursor.
 Returns true if there's a expansion, else false."
   (interactive)
@@ -797,11 +797,11 @@ Returns true if there's a expansion, else false."
     (if (abbrev-symbol ξab-str)
         (progn
           (abbrev-insert (abbrev-symbol ξab-str) ξab-str ξp1 ξp2 )
-          (xcj--abbrev-position-cursor ξp1)
+          (xah-clojure--abbrev-position-cursor ξp1)
           t)
       nil)))
 
-(defun xcj-abbrev-enable-function ()
+(defun xah-clojure-abbrev-enable-function ()
   "Determine whether to expand abbrev.
 This is called by emacs abbrev system."
   (let ((ξsyntax-state (syntax-ppss)))
@@ -809,7 +809,7 @@ This is called by emacs abbrev system."
         (progn nil)
       t)))
 
-(defun xcj--abbrev-position-cursor (&optional φpos)
+(defun xah-clojure--abbrev-position-cursor (&optional φpos)
   "Move cursor back to ▮.
 but limit backward search to at φpos or at beginning of line.
 return true if found, else false."
@@ -819,10 +819,10 @@ return true if found, else false."
 
 ;; indent/reformat related
 
-(defun xcj-complete-or-indent ()
+(defun xah-clojure-complete-or-indent ()
   "Do keyword completion or indent/prettify-format.
 
-If char before point is letters and char after point is whitespace or punctuation, then do completion, except when in string or comment. In these cases, do `xcj-prettify-root-sexp'."
+If char before point is letters and char after point is whitespace or punctuation, then do completion, except when in string or comment. In these cases, do `xah-clojure-prettify-root-sexp'."
   (interactive)
   ;; consider the char to the left or right of cursor. Each side is either empty or char.
   ;; there are 4 cases:
@@ -833,28 +833,28 @@ If char before point is letters and char after point is whitespace or punctuatio
   (let ( (ξsyntax-state (syntax-ppss)))
     (if (or (nth 3 ξsyntax-state) (nth 4 ξsyntax-state))
         (progn
-          (xcj-prettify-root-sexp))
+          (xah-clojure-prettify-root-sexp))
       (progn (if
                  (and (looking-back "[-_a-zA-Z]")
                       (or (eobp) (looking-at "[\n[:blank:][:punct:]]")))
-                 (xcj-complete-symbol)
-               (xcj-prettify-root-sexp))))))
+                 (xah-clojure-complete-symbol)
+               (xah-clojure-prettify-root-sexp))))))
 
-(defun xcj-prettify-root-sexp ()
+(defun xah-clojure-prettify-root-sexp ()
   "Prettify format current root sexp group.
 Root sexp group is the outmost sexp unit."
   (interactive)
   (save-excursion
     (let (ξp1 ξp2)
-      (xcj-goto-outmost-bracket)
+      (xah-clojure-goto-outmost-bracket)
       (setq ξp1 (point))
       (setq ξp2 (scan-sexps (point) 1))
       (progn
         (goto-char ξp1)
         (indent-sexp)
-        (xcj-compact-parens-region ξp1 ξp2)))))
+        (xah-clojure-compact-parens-region ξp1 ξp2)))))
 
-(defun xcj-goto-outmost-bracket (&optional φpos)
+(defun xah-clojure-goto-outmost-bracket (&optional φpos)
   "Move cursor to the beginning of outer-most bracket, with respect to φpos.
 Returns true if point is moved, else false."
   (interactive)
@@ -866,30 +866,30 @@ Returns true if point is moved, else false."
     (while
         (and (< (setq ξi (1+ ξi)) 20)
              (not (eq (nth 0 (syntax-ppss (point))) 0)))
-      (xcj-up-list -1 "ESCAPE-STRINGS" "NO-SYNTAX-CROSSING"))
+      (xah-clojure-up-list -1 "ESCAPE-STRINGS" "NO-SYNTAX-CROSSING"))
     (if (equal ξp0 (point))
         nil
       t
       )))
 
-(defun xcj-compact-parens (&optional φp1 φp2)
+(defun xah-clojure-compact-parens (&optional φp1 φp2)
   "Remove whitespaces in ending repetition of parenthesises.
 If there's a text selection, act on the region, else, on defun block."
   (interactive
    (if (use-region-p)
        (list (region-beginning) (region-end))
      (save-excursion
-       (xcj-goto-outmost-bracket)
+       (xah-clojure-goto-outmost-bracket)
        (list (point) (scan-sexps (point) 1)))))
   (let ((ξp1 φp1) (ξp2 φp2))
     (when (null φp1)
       (save-excursion
-        (xcj-goto-outmost-bracket)
+        (xah-clojure-goto-outmost-bracket)
         (setq ξp1 (point))
         (setq ξp2 (scan-sexps (point) 1))))
-    (xcj-compact-parens-region ξp1 ξp2)))
+    (xah-clojure-compact-parens-region ξp1 ξp2)))
 
-(defun xcj-compact-parens-region (φp1 φp2)
+(defun xah-clojure-compact-parens-region (φp1 φp2)
   "Remove whitespaces in ending repetition of parenthesises in region."
   (interactive "r")
   (let (ξsyntax-state)
@@ -906,9 +906,9 @@ If there's a text selection, act on the region, else, on defun block."
 
 ;; abbrev
 
-(setq xcj-abbrev-table nil)
+(setq xah-clojure-abbrev-table nil)
 
-(define-abbrev-table 'xcj-abbrev-table
+(define-abbrev-table 'xah-clojure-abbrev-table
   '(
 
     ("let" "(let [a▮ 3] 4)" nil :system t )
@@ -935,29 +935,29 @@ If there's a text selection, act on the region, else, on defun block."
 ;; :regexp "\\_<\\([_-0-9A-Za-z]+\\)"
   :regexp "\\([_-0-9A-Za-z]+\\)"
   :case-fixed t
-  ;; :enable-function 'xcj-abbrev-enable-function
+  ;; :enable-function 'xah-clojure-abbrev-enable-function
   )
 
 
 ;; syntax coloring related
 
-(defface xcj-function-param
+(defface xah-clojure-function-param
   '(
     (t :foreground "black" :background "LightYellow"))
   "face for function parameters."
   :group 'xah-clojure-mode )
 
-(defface xcj-user-variable
+(defface xah-clojure-user-variable
   '(
     (t :foreground "magenta"))
   "face for user variables."
   :group 'xah-clojure-mode )
 
-(setq xcj-font-lock-keywords
+(setq xah-clojure-font-lock-keywords
       (let (
-            (clojureLangWords (regexp-opt xcj-clojure-basic-words 'symbols))
-            (clojureCoreWords (regexp-opt xcj-clojure.core-words 'symbols))
-            (clojureFunWords (regexp-opt xcj-clojure-fun-words 'symbols))
+            (clojureLangWords (regexp-opt xah-clojure-clojure-basic-words 'symbols))
+            (clojureCoreWords (regexp-opt xah-clojure-clojure.core-words 'symbols))
+            (clojureFunWords (regexp-opt xah-clojure-clojure-fun-words 'symbols))
             (clojureKeyWords ":[-_?0-9A-Za-z]+" )
             (clojureConstantWords "\\*[-_?0-9A-Za-z]+\\*" )
             (functionParameters "φ[-_?0-9A-Za-z]+" )
@@ -969,8 +969,8 @@ If there's a text selection, act on the region, else, on defun block."
           (,clojureKeyWords . font-lock-keyword-face)
           (,clojureConstantWords . font-lock-constant-face)
 
-          (,functionParameters . 'xcj-function-param)
-          (,userVars . 'xcj-user-variable))))
+          (,functionParameters . 'xah-clojure-function-param)
+          (,userVars . 'xah-clojure-user-variable))))
 
 ;; font-lock-builtin-face
 ;; font-lock-comment-delimiter-face
@@ -989,8 +989,8 @@ If there's a text selection, act on the region, else, on defun block."
 
 
 ;; syntax table
-(defvar xcj-syntax-table nil "Syntax table for `xah-clojure-mode'.")
-(setq xcj-syntax-table
+(defvar xah-clojure-syntax-table nil "Syntax table for `xah-clojure-mode'.")
+(setq xah-clojure-syntax-table
       (let ((synTable (copy-syntax-table emacs-lisp-mode-syntax-table)))
 
         (modify-syntax-entry ?~ "'   " synTable)
@@ -1019,37 +1019,37 @@ If there's a text selection, act on the region, else, on defun block."
 (when (string-equal system-type "windows-nt")
   (define-key key-translation-map (kbd "<apps>") (kbd "<menu>")))
 
-(defvar xcj-keymap nil "Keybinding for `xah-clojure-mode'")
+(defvar xah-clojure-keymap nil "Keybinding for `xah-clojure-mode'")
 (progn
-  (setq xcj-keymap (make-sparse-keymap))
-  (define-key xcj-keymap (kbd "TAB") 'xcj-complete-or-indent)
+  (setq xah-clojure-keymap (make-sparse-keymap))
+  (define-key xah-clojure-keymap (kbd "TAB") 'xah-clojure-complete-or-indent)
 
-  (define-prefix-command 'xcj-single-keys-keymap)
+  (define-prefix-command 'xah-clojure-single-keys-keymap)
 
-  (define-key xcj-single-keys-keymap (kbd "u") 'xcj-add-paren-around-symbol)
+  (define-key xah-clojure-single-keys-keymap (kbd "u") 'xah-clojure-add-paren-around-symbol)
 
-  (define-key xcj-single-keys-keymap (kbd "t") 'xcj-prettify-root-sexp)
-  (define-key xcj-single-keys-keymap (kbd "h") 'xcj-remove-paren-pair)
+  (define-key xah-clojure-single-keys-keymap (kbd "t") 'xah-clojure-prettify-root-sexp)
+  (define-key xah-clojure-single-keys-keymap (kbd "h") 'xah-clojure-remove-paren-pair)
 
-  (define-key xcj-single-keys-keymap (kbd "p") 'xcj-compact-parens)
-  (define-key xcj-single-keys-keymap (kbd "c") 'xcj-complete-symbol)
+  (define-key xah-clojure-single-keys-keymap (kbd "p") 'xah-clojure-compact-parens)
+  (define-key xah-clojure-single-keys-keymap (kbd "c") 'xah-clojure-complete-symbol)
 
-  (define-key xcj-single-keys-keymap (kbd "e") 'xcj-expand-abbrev-maybe)
+  (define-key xah-clojure-single-keys-keymap (kbd "e") 'xah-clojure-expand-abbrev-maybe)
 
-  (define-key xcj-single-keys-keymap (kbd "w .") 'cider-eval-buffer)
-  (define-key xcj-single-keys-keymap (kbd "w e") 'cider-eval-defun-at-point)
-  (define-key xcj-single-keys-keymap (kbd "w m") 'cider-eval-last-sexp)
-  (define-key xcj-single-keys-keymap (kbd "w u") 'cider-eval-region)
+  (define-key xah-clojure-single-keys-keymap (kbd "w .") 'cider-eval-buffer)
+  (define-key xah-clojure-single-keys-keymap (kbd "w e") 'cider-eval-defun-at-point)
+  (define-key xah-clojure-single-keys-keymap (kbd "w m") 'cider-eval-last-sexp)
+  (define-key xah-clojure-single-keys-keymap (kbd "w u") 'cider-eval-region)
 
   )
 
 
 
-;; define the mode
+;;;###autoload
 (defun xah-clojure-mode ()
   "A major mode for clojure.
 
-Most useful command is `xcj-complete-or-indent'.
+Most useful command is `xah-clojure-complete-or-indent'.
 
 Press TAB before word to pretty format (indent).
 
@@ -1063,24 +1063,24 @@ URL `http://ergoemacs.org/emacs/modernization_mark-word.html'
 or
 URL `http://ergoemacs.github.io/ergoemacs-mode/'
 
-\\{xcj-keymap}"
+\\{xah-clojure-keymap}"
   (interactive)
 
   (kill-all-local-variables)
 
   (setq mode-name "∑clojure")
   (setq major-mode 'xah-clojure-mode)
-  (setq font-lock-defaults '((xcj-font-lock-keywords)))
+  (setq font-lock-defaults '((xah-clojure-font-lock-keywords)))
 
-  (set-syntax-table xcj-syntax-table)
-  (setq local-abbrev-table xcj-abbrev-table)
+  (set-syntax-table xah-clojure-syntax-table)
+  (setq local-abbrev-table xah-clojure-abbrev-table)
 
   (if (or
        (not (boundp 'xfk-major-mode-lead-key))
        (null 'xfk-major-mode-lead-key))
-      (define-key xcj-keymap (kbd "<menu> e") xcj-single-keys-keymap)
-    (define-key xcj-keymap xfk-major-mode-lead-key xcj-single-keys-keymap))
-  (use-local-map xcj-keymap)
+      (define-key xah-clojure-keymap (kbd "<menu> e") xah-clojure-single-keys-keymap)
+    (define-key xah-clojure-keymap xfk-major-mode-lead-key xah-clojure-single-keys-keymap))
+  (use-local-map xah-clojure-keymap)
 
   (setq-local comment-start "; ")
   (setq-local comment-end "")
@@ -1091,7 +1091,7 @@ URL `http://ergoemacs.github.io/ergoemacs-mode/'
   (setq-local indent-line-function 'lisp-indent-line)
   (setq-local tab-always-indent 'complete)
 
-  (add-hook 'completion-at-point-functions 'xcj-complete-symbol nil 'local)
+  (add-hook 'completion-at-point-functions 'xah-clojure-complete-symbol nil 'local)
 
   (abbrev-mode 1)
 
@@ -1107,8 +1107,8 @@ URL `http://ergoemacs.github.io/ergoemacs-mode/'
             (>= emacs-minor-version 4))
        (>= emacs-major-version 25))
       (progn
-        (setq abbrev-expand-function 'xcj-expand-abbrev-maybe))
-    (progn (add-hook 'abbrev-expand-functions 'xcj-expand-abbrev-maybe nil t)))
+        (setq abbrev-expand-function 'xah-clojure-expand-abbrev-maybe))
+    (progn (add-hook 'abbrev-expand-functions 'xah-clojure-expand-abbrev-maybe nil t)))
 
   (run-mode-hooks 'xah-clojure-mode-hook))
 
