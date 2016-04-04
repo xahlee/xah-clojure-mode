@@ -1075,11 +1075,12 @@ URL `http://ergoemacs.github.io/ergoemacs-mode/'
   (set-syntax-table xah-clojure-syntax-table)
   (setq local-abbrev-table xah-clojure-abbrev-table)
 
-  (if (or
-       (not (boundp 'xfk-major-mode-lead-key))
-       (null 'xfk-major-mode-lead-key))
-      (define-key xah-clojure-keymap (kbd "<menu> e") xah-clojure-single-keys-keymap)
-    (define-key xah-clojure-keymap xfk-major-mode-lead-key xah-clojure-single-keys-keymap))
+  (define-key xah-clojure-keymap
+    (if (boundp 'xah-major-mode-lead-key)
+        xah-major-mode-lead-key
+      (kbd "C-c C-c"))
+    xah-clojure-single-keys-keymap)
+
   (use-local-map xah-clojure-keymap)
 
   (setq-local comment-start "; ")
