@@ -699,24 +699,24 @@ See
 This uses `ido-mode' user interface for completion."
   (interactive)
   (let* (
-         (ξbds (bounds-of-thing-at-point 'symbol))
-         (ξp1 (car ξbds))
-         (ξp2 (cdr ξbds))
-         (ξcurrent-sym
-          (if  (or (null ξp1) (null ξp2) (equal ξp1 ξp2))
+         (-bds (bounds-of-thing-at-point 'symbol))
+         (-p1 (car -bds))
+         (-p2 (cdr -bds))
+         (-current-sym
+          (if  (or (null -p1) (null -p2) (equal -p1 -p2))
               ""
-            (buffer-substring-no-properties ξp1 ξp2)))
-         ξresult-sym)
-    (when (not ξcurrent-sym) (setq ξcurrent-sym ""))
-    (setq ξresult-sym
-          (ido-completing-read "" xah-clojure-clojure-all-keywords nil nil ξcurrent-sym ))
-    (delete-region ξp1 ξp2)
-    (insert ξresult-sym)
+            (buffer-substring-no-properties -p1 -p2)))
+         -result-sym)
+    (when (not -current-sym) (setq -current-sym ""))
+    (setq -result-sym
+          (ido-completing-read "" xah-clojure-clojure-all-keywords nil nil -current-sym ))
+    (delete-region -p1 -p2)
+    (insert -result-sym)
 
     ;; use case of completion
 
     (when (not (xah-clojure-start-with-left-paren-p))
-      (let ( (ξabbrev-expanded-p (xah-clojure-expand-abbrev)))
+      (let ( (-abbrev-expanded-p (xah-clojure-expand-abbrev)))
         ;; (when (not (xah-clojure-start-with-left-paren-p)) (xah-clojure-add-paren-around-symbol))
 ))))
 
@@ -762,17 +762,17 @@ Call `exchange-point-and-mark' to highlight them.
       (goto-char p1)
       (delete-char 1))))
 
-(defun xah-clojure-expand-abbrev-maybe (&optional φexpand-func)
+(defun xah-clojure-expand-abbrev-maybe (&optional *expand-func)
   "Expand clojure function name before cursor into template.
 Right now, always expand.
 Used to be: Don't expand when in string or comment.
 Returns true if there's a expansion, else false."
   (interactive)
   (let (
-        ξp1 ξp2
-        ξab-str
-        (ξsyntax-state (syntax-ppss)))
-    ;; (if (or (nth 3 ξsyntax-state) (nth 4 ξsyntax-state))
+        -p1 -p2
+        -ab-str
+        (-syntax-state (syntax-ppss)))
+    ;; (if (or (nth 3 -syntax-state) (nth 4 -syntax-state))
     ;;     nil
     ;;   (xah-clojure-expand-abbrev))
     (xah-clojure-expand-abbrev)
@@ -785,36 +785,36 @@ Returns true if there's a expansion, else false."
 Returns true if there's a expansion, else false."
   (interactive)
   (let (
-        ξp1 ξp2
-        ξab-str
+        -p1 -p2
+        -ab-str
         )
     (save-excursion
       (forward-symbol -1)
-      (setq ξp1 (point))
+      (setq -p1 (point))
       (forward-symbol 1)
-      (setq ξp2 (point)))
-    (setq ξab-str (buffer-substring-no-properties ξp1 ξp2))
-    (if (abbrev-symbol ξab-str)
+      (setq -p2 (point)))
+    (setq -ab-str (buffer-substring-no-properties -p1 -p2))
+    (if (abbrev-symbol -ab-str)
         (progn
-          (abbrev-insert (abbrev-symbol ξab-str) ξab-str ξp1 ξp2 )
-          (xah-clojure--abbrev-position-cursor ξp1)
+          (abbrev-insert (abbrev-symbol -ab-str) -ab-str -p1 -p2 )
+          (xah-clojure--abbrev-position-cursor -p1)
           t)
       nil)))
 
 (defun xah-clojure-abbrev-enable-function ()
   "Determine whether to expand abbrev.
 This is called by emacs abbrev system."
-  (let ((ξsyntax-state (syntax-ppss)))
-    (if (or (nth 3 ξsyntax-state) (nth 4 ξsyntax-state))
+  (let ((-syntax-state (syntax-ppss)))
+    (if (or (nth 3 -syntax-state) (nth 4 -syntax-state))
         (progn nil)
       t)))
 
-(defun xah-clojure--abbrev-position-cursor (&optional φpos)
+(defun xah-clojure--abbrev-position-cursor (&optional *pos)
   "Move cursor back to ▮.
-but limit backward search to at φpos or at beginning of line.
+but limit backward search to at *pos or at beginning of line.
 return true if found, else false."
   (interactive)
-  (search-backward "▮" (if φpos φpos (line-beginning-position)) t ))
+  (search-backward "▮" (if *pos *pos (line-beginning-position)) t ))
 
 
 ;; indent/reformat related
@@ -830,8 +830,8 @@ If char before point is letters and char after point is whitespace or punctuatio
   ;; space▮char → do indent
   ;; char▮space → do completion
   ;; char ▮char → do indent
-  (let ( (ξsyntax-state (syntax-ppss)))
-    (if (or (nth 3 ξsyntax-state) (nth 4 ξsyntax-state))
+  (let ( (-syntax-state (syntax-ppss)))
+    (if (or (nth 3 -syntax-state) (nth 4 -syntax-state))
         (progn
           (xah-clojure-prettify-root-sexp))
       (progn (if
@@ -845,34 +845,34 @@ If char before point is letters and char after point is whitespace or punctuatio
 Root sexp group is the outmost sexp unit."
   (interactive)
   (save-excursion
-    (let (ξp1 ξp2)
+    (let (-p1 -p2)
       (xah-clojure-goto-outmost-bracket)
-      (setq ξp1 (point))
-      (setq ξp2 (scan-sexps (point) 1))
+      (setq -p1 (point))
+      (setq -p2 (scan-sexps (point) 1))
       (progn
-        (goto-char ξp1)
+        (goto-char -p1)
         (indent-sexp)
-        (xah-clojure-compact-parens-region ξp1 ξp2)))))
+        (xah-clojure-compact-parens-region -p1 -p2)))))
 
-(defun xah-clojure-goto-outmost-bracket (&optional φpos)
-  "Move cursor to the beginning of outer-most bracket, with respect to φpos.
+(defun xah-clojure-goto-outmost-bracket (&optional *pos)
+  "Move cursor to the beginning of outer-most bracket, with respect to *pos.
 Returns true if point is moved, else false."
   (interactive)
-  (let ((ξi 0)
-        (ξp0 (if (number-or-marker-p φpos)
-                 φpos
+  (let ((-i 0)
+        (-p0 (if (number-or-marker-p *pos)
+                 *pos
                (point))))
-    (goto-char ξp0)
+    (goto-char -p0)
     (while
-        (and (< (setq ξi (1+ ξi)) 20)
+        (and (< (setq -i (1+ -i)) 20)
              (not (eq (nth 0 (syntax-ppss (point))) 0)))
       (xah-clojure-up-list -1 "ESCAPE-STRINGS" "NO-SYNTAX-CROSSING"))
-    (if (equal ξp0 (point))
+    (if (equal -p0 (point))
         nil
       t
       )))
 
-(defun xah-clojure-compact-parens (&optional φp1 φp2)
+(defun xah-clojure-compact-parens (&optional *p1 *p2)
   "Remove whitespaces in ending repetition of parenthesises.
 If there's a text selection, act on the region, else, on defun block."
   (interactive
@@ -881,24 +881,24 @@ If there's a text selection, act on the region, else, on defun block."
      (save-excursion
        (xah-clojure-goto-outmost-bracket)
        (list (point) (scan-sexps (point) 1)))))
-  (let ((ξp1 φp1) (ξp2 φp2))
-    (when (null φp1)
+  (let ((-p1 *p1) (-p2 *p2))
+    (when (null *p1)
       (save-excursion
         (xah-clojure-goto-outmost-bracket)
-        (setq ξp1 (point))
-        (setq ξp2 (scan-sexps (point) 1))))
-    (xah-clojure-compact-parens-region ξp1 ξp2)))
+        (setq -p1 (point))
+        (setq -p2 (scan-sexps (point) 1))))
+    (xah-clojure-compact-parens-region -p1 -p2)))
 
-(defun xah-clojure-compact-parens-region (φp1 φp2)
+(defun xah-clojure-compact-parens-region (*p1 *p2)
   "Remove whitespaces in ending repetition of parenthesises in region."
   (interactive "r")
-  (let (ξsyntax-state)
+  (let (-syntax-state)
     (save-restriction
-      (narrow-to-region φp1 φp2)
+      (narrow-to-region *p1 *p2)
       (goto-char (point-min))
       (while (search-forward-regexp ")[ \t\n]+)" nil t)
-        (setq ξsyntax-state (syntax-ppss (match-beginning 0)))
-        (if (or (nth 3 ξsyntax-state ) (nth 4 ξsyntax-state))
+        (setq -syntax-state (syntax-ppss (match-beginning 0)))
+        (if (or (nth 3 -syntax-state ) (nth 4 -syntax-state))
             (progn (search-forward ")"))
           (progn (replace-match "))")
                  (search-backward ")")))))))
@@ -906,9 +906,9 @@ If there's a text selection, act on the region, else, on defun block."
 
 ;; abbrev
 
-(setq xah-clojure-abbrev-table nil)
+(setq xah-clojure-mode-abbrev-table nil)
 
-(define-abbrev-table 'xah-clojure-abbrev-table
+(define-abbrev-table 'xah-clojure-mode-abbrev-table
   '(
 
     ("let" "(let [a▮ 3] 4)" nil :system t )
@@ -989,8 +989,8 @@ If there's a text selection, act on the region, else, on defun block."
 
 
 ;; syntax table
-(defvar xah-clojure-syntax-table nil "Syntax table for `xah-clojure-mode'.")
-(setq xah-clojure-syntax-table
+(defvar xah-clojure-mode-syntax-table nil "Syntax table for `xah-clojure-mode'.")
+(setq xah-clojure-mode-syntax-table
       (let ((synTable (copy-syntax-table emacs-lisp-mode-syntax-table)))
 
         (modify-syntax-entry ?~ "'   " synTable)
@@ -1016,72 +1016,48 @@ If there's a text selection, act on the region, else, on defun block."
 
 ;; keybinding
 
-(when (string-equal system-type "windows-nt")
-  (define-key key-translation-map (kbd "<apps>") (kbd "<menu>")))
-
-(defvar xah-clojure-keymap nil "Keybinding for `xah-clojure-mode'")
+(defvar xah-clojure-mode-map nil "Keybinding for `xah-clojure-mode'")
 (progn
-  (setq xah-clojure-keymap (make-sparse-keymap))
-  (define-key xah-clojure-keymap (kbd "TAB") 'xah-clojure-complete-or-indent)
+  (setq xah-clojure-mode-map (make-sparse-keymap))
+  (define-key xah-clojure-mode-map (kbd "TAB") 'xah-clojure-complete-or-indent)
 
-  (define-prefix-command 'xah-clojure-single-keys-keymap)
+  (define-prefix-command 'xah-clojure-mode-no-chord-map)
 
-  (define-key xah-clojure-single-keys-keymap (kbd "u") 'xah-clojure-add-paren-around-symbol)
+  (define-key xah-clojure-mode-no-chord-map (kbd "u") 'xah-clojure-add-paren-around-symbol)
 
-  (define-key xah-clojure-single-keys-keymap (kbd "t") 'xah-clojure-prettify-root-sexp)
-  (define-key xah-clojure-single-keys-keymap (kbd "h") 'xah-clojure-remove-paren-pair)
+  (define-key xah-clojure-mode-no-chord-map (kbd "t") 'xah-clojure-prettify-root-sexp)
+  (define-key xah-clojure-mode-no-chord-map (kbd "h") 'xah-clojure-remove-paren-pair)
 
-  (define-key xah-clojure-single-keys-keymap (kbd "p") 'xah-clojure-compact-parens)
-  (define-key xah-clojure-single-keys-keymap (kbd "c") 'xah-clojure-complete-symbol)
+  (define-key xah-clojure-mode-no-chord-map (kbd "p") 'xah-clojure-compact-parens)
+  (define-key xah-clojure-mode-no-chord-map (kbd "c") 'xah-clojure-complete-symbol)
 
-  (define-key xah-clojure-single-keys-keymap (kbd "e") 'xah-clojure-expand-abbrev-maybe)
+  (define-key xah-clojure-mode-no-chord-map (kbd "e") 'xah-clojure-expand-abbrev-maybe)
 
-  (define-key xah-clojure-single-keys-keymap (kbd "w .") 'cider-eval-buffer)
-  (define-key xah-clojure-single-keys-keymap (kbd "w e") 'cider-eval-defun-at-point)
-  (define-key xah-clojure-single-keys-keymap (kbd "w m") 'cider-eval-last-sexp)
-  (define-key xah-clojure-single-keys-keymap (kbd "w u") 'cider-eval-region)
-
+  (define-key xah-clojure-mode-no-chord-map (kbd "w .") 'cider-eval-buffer)
+  (define-key xah-clojure-mode-no-chord-map (kbd "w e") 'cider-eval-defun-at-point)
+  (define-key xah-clojure-mode-no-chord-map (kbd "w m") 'cider-eval-last-sexp)
+  (define-key xah-clojure-mode-no-chord-map (kbd "w u") 'cider-eval-region)
+  
   )
 
 
 
 ;;;###autoload
-(defun xah-clojure-mode ()
+(define-derived-mode xah-clojure-mode prog-mode "ξclojure"
   "A major mode for clojure.
-
 Most useful command is `xah-clojure-complete-or-indent'.
-
 Press TAB before word to pretty format (indent).
-
 Press TAB after word to complete.
-
 Press SPACE to expand name to template.
 
-i also recommend you use these commands:
+Also recommend the following commands:
 URL `http://ergoemacs.org/emacs/emacs_navigating_keys_for_brackets.html'
 URL `http://ergoemacs.org/emacs/modernization_mark-word.html'
 or
 URL `http://ergoemacs.github.io/ergoemacs-mode/'
 
-\\{xah-clojure-keymap}"
-  (interactive)
-
-  (kill-all-local-variables)
-
-  (setq mode-name "∑clojure")
-  (setq major-mode 'xah-clojure-mode)
+\\{xah-clojure-mode-map}"
   (setq font-lock-defaults '((xah-clojure-font-lock-keywords)))
-
-  (set-syntax-table xah-clojure-syntax-table)
-  (setq local-abbrev-table xah-clojure-abbrev-table)
-
-  (define-key xah-clojure-keymap
-    (if (boundp 'xah-major-mode-lead-key)
-        xah-major-mode-lead-key
-      (kbd "C-c C-c"))
-    xah-clojure-single-keys-keymap)
-
-  (use-local-map xah-clojure-keymap)
 
   (setq-local comment-start "; ")
   (setq-local comment-end "")
@@ -1093,9 +1069,7 @@ URL `http://ergoemacs.github.io/ergoemacs-mode/'
   (setq-local tab-always-indent 'complete)
 
   (add-hook 'completion-at-point-functions 'xah-clojure-complete-symbol nil 'local)
-
-  (abbrev-mode 1)
-
+  
   (progn
     ;; setup auto-complete-mode
     (when (fboundp 'auto-complete-mode)
@@ -1110,7 +1084,10 @@ URL `http://ergoemacs.github.io/ergoemacs-mode/'
       (progn
         (setq abbrev-expand-function 'xah-clojure-expand-abbrev-maybe))
     (progn (add-hook 'abbrev-expand-functions 'xah-clojure-expand-abbrev-maybe nil t)))
+  :group 'xah-clojure-mode
+  )
 
-  (run-mode-hooks 'xah-clojure-mode-hook))
+(add-to-list 'auto-mode-alist '("\\.clj\\'" . xah-clojure-mode))
+
 
 (provide 'xah-clojure-mode)
