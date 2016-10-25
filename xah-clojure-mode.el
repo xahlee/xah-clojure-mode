@@ -19,6 +19,7 @@
 ;; See: http://ergoemacs.org/emacs/xah-clojure-mode.html
 
 ;;; History:
+;; version 0.2, 2016-10-25
 ;; version 0.1, 2014-10-31 first version
 
 ;;; Code:
@@ -762,59 +763,58 @@ Call `exchange-point-and-mark' to highlight them.
       (goto-char p1)
       (delete-char 1))))
 
-(defun xah-clojure-expand-abbrev-maybe (&optional *expand-func)
-  "Expand clojure function name before cursor into template.
-Right now, always expand.
-Used to be: Don't expand when in string or comment.
-Returns true if there's a expansion, else false."
-  (interactive)
-  (let (
-        -p1 -p2
-        -ab-str
-        (-syntax-state (syntax-ppss)))
-    ;; (if (or (nth 3 -syntax-state) (nth 4 -syntax-state))
-    ;;     nil
-    ;;   (xah-clojure-expand-abbrev))
-    (xah-clojure-expand-abbrev)
-    ))
-
-(put 'xah-clojure-expand-abbrev-maybe 'no-self-insert t)
+(defun xah-clojure-abbrev-enable-function ()
+  "Return t if not in string or comment. Else nil.
+This is for abbrev table property `:enable-function'.
+Version 2016-10-24"
+  (let ((-syntax-state (syntax-ppss)))
+    (not (or (nth 3 -syntax-state) (nth 4 -syntax-state)))))
 
 (defun xah-clojure-expand-abbrev ()
-  "Expand the symbol before cursor.
-Returns true if there's a expansion, else false."
+  "Expand the symbol before cursor,
+if cursor is not in string or comment.
+Returns the abbrev symbol if there's a expansion, else nil.
+Version 2016-10-24"
   (interactive)
-  (let (
-        -p1 -p2
-        -ab-str
-        )
-    (save-excursion
-      (forward-symbol -1)
-      (setq -p1 (point))
-      (forward-symbol 1)
-      (setq -p2 (point)))
-    (setq -ab-str (buffer-substring-no-properties -p1 -p2))
-    (if (abbrev-symbol -ab-str)
-        (progn
-          (abbrev-insert (abbrev-symbol -ab-str) -ab-str -p1 -p2 )
-          (xah-clojure--abbrev-position-cursor -p1)
-          t)
-      nil)))
-
-(defun xah-clojure-abbrev-enable-function ()
-  "Determine whether to expand abbrev.
-This is called by emacs abbrev system."
-  (let ((-syntax-state (syntax-ppss)))
-    (if (or (nth 3 -syntax-state) (nth 4 -syntax-state))
-        (progn nil)
-      t)))
+  (when (xah-clojure-abbrev-enable-function) ; abbrev property :enable-function doesn't seem to work, so check here instead
+    (let (
+          -p1 -p2
+          -abrStr
+          -abrSymbol
+          )
+      (save-excursion
+        (forward-symbol -1)
+        (setq -p1 (point))
+        (forward-symbol 1)
+        (setq -p2 (point)))
+      (setq -abrStr (buffer-substring-no-properties -p1 -p2))
+      (setq -abrSymbol (abbrev-symbol -abrStr))
+      (if -abrSymbol
+          (progn
+            (abbrev-insert -abrSymbol -abrStr -p1 -p2 )
+            (xah-clojure--abbrev-position-cursor -p1)
+            -abrSymbol)
+        nil))))
 
 (defun xah-clojure--abbrev-position-cursor (&optional *pos)
-  "Move cursor back to ▮.
-but limit backward search to at *pos or at beginning of line.
-return true if found, else false."
+  "Move cursor back to ▮ if exist, else put at end.
+Return true if found, else false.
+Version 2016-10-24"
   (interactive)
-  (search-backward "▮" (if *pos *pos (line-beginning-position)) t ))
+  (message "pos is %s" *pos)
+  (let ((-found-p (search-backward "▮" (if *pos *pos (max (point-min) (- (point) 100))) t )))
+    (when -found-p (forward-char ))
+    -found-p
+    ))
+
+(defun xah-clojure--ahf ()
+  "Abbrev hook function, used for `define-abbrev'.
+ Our use is to prevent inserting the char that triggered expansion. Experimental.
+ the “ahf” stand for abbrev hook function.
+Version 2016-10-24"
+  t)
+
+(put 'xah-clojure--ahf 'no-self-insert t)
 
 
 ;; indent/reformat related
@@ -1037,7 +1037,7 @@ If there's a text selection, act on the region, else, on defun block."
   (define-key xah-clojure-mode-no-chord-map (kbd "w e") 'cider-eval-defun-at-point)
   (define-key xah-clojure-mode-no-chord-map (kbd "w m") 'cider-eval-last-sexp)
   (define-key xah-clojure-mode-no-chord-map (kbd "w u") 'cider-eval-region)
-  
+
   )
 
 
@@ -1069,7 +1069,7 @@ URL `http://ergoemacs.github.io/ergoemacs-mode/'
   (setq-local tab-always-indent 'complete)
 
   (add-hook 'completion-at-point-functions 'xah-clojure-complete-symbol nil 'local)
-  
+
   (progn
     ;; setup auto-complete-mode
     (when (fboundp 'auto-complete-mode)
@@ -1082,12 +1082,14 @@ URL `http://ergoemacs.github.io/ergoemacs-mode/'
             (>= emacs-minor-version 4))
        (>= emacs-major-version 25))
       (progn
-        (setq abbrev-expand-function 'xah-clojure-expand-abbrev-maybe))
-    (progn (add-hook 'abbrev-expand-functions 'xah-clojure-expand-abbrev-maybe nil t)))
+        (setq abbrev-expand-function 'xah-clojure-expand-abbrev))
+    (progn (add-hook 'abbrev-expand-functions 'xah-clojure-expand-abbrev nil t)))
+
+  (abbrev-mode 1)
+
   :group 'xah-clojure-mode
   )
 
 (add-to-list 'auto-mode-alist '("\\.clj\\'" . xah-clojure-mode))
-
 
 (provide 'xah-clojure-mode)
