@@ -801,7 +801,6 @@ Version 2016-10-24"
 Return true if found, else false.
 Version 2016-10-24"
   (interactive)
-  (message "pos is %s" *pos)
   (let ((-found-p (search-backward "▮" (if *pos *pos (max (point-min) (- (point) 100))) t )))
     (when -found-p (forward-char ))
     -found-p
@@ -835,7 +834,7 @@ If char before point is letters and char after point is whitespace or punctuatio
         (progn
           (xah-clojure-prettify-root-sexp))
       (progn (if
-                 (and (looking-back "[-_a-zA-Z]")
+                 (and (looking-back "[-_a-zA-Z]" 1)
                       (or (eobp) (looking-at "[\n[:blank:][:punct:]]")))
                  (xah-clojure-complete-symbol)
                (xah-clojure-prettify-root-sexp))))))
@@ -1070,20 +1069,10 @@ URL `http://ergoemacs.github.io/ergoemacs-mode/'
 
   (add-hook 'completion-at-point-functions 'xah-clojure-complete-symbol nil 'local)
 
-  (progn
-    ;; setup auto-complete-mode
-    (when (fboundp 'auto-complete-mode)
-      (add-to-list 'ac-modes 'xah-clojure-mode)))
-  ;; (add-hook 'xah-clojure-mode-hook 'ac-emacs-lisp-mode-setup)
-
   (make-local-variable 'abbrev-expand-function)
-  (if (or
-       (and (>= emacs-major-version 24)
-            (>= emacs-minor-version 4))
-       (>= emacs-major-version 25))
-      (progn
-        (setq abbrev-expand-function 'xah-clojure-expand-abbrev))
-    (progn (add-hook 'abbrev-expand-functions 'xah-clojure-expand-abbrev nil t)))
+  (if (version< emacs-version "24.4")
+      (add-hook 'abbrev-expand-functions 'xah-clojure-expand-abbrev nil t)
+    (setq abbrev-expand-function 'xah-clojure-expand-abbrev))
 
   (abbrev-mode 1)
 
