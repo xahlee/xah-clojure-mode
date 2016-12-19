@@ -1,9 +1,10 @@
-;;; xah-clojure-mode.el --- Major mode for editing clojure. -*- coding: utf-8 -*-
+;;; xah-clojure-mode.el --- Major mode for editing clojure. -*- coding: utf-8; lexical-binding: t; -*-
 
-;; Copyright © 2014 by Xah Lee
+;; Copyright © 2014, 2016 by Xah Lee
 
 ;; Author: Xah Lee <xah@xahlee.org> ( http://xahlee.org/ )
 ;; Created: 2014-10-31
+;; Package-Requires: ((emacs "24.1"))
 ;; Keywords: languages, convenience
 
 ;; LICENSE:
@@ -19,6 +20,7 @@
 ;; See: http://ergoemacs.org/emacs/xah-clojure-mode.html
 
 ;;; History:
+;; version 2016-12-18
 ;; version 0.2, 2016-10-25
 ;; version 0.1, 2014-10-31 first version
 
@@ -697,7 +699,8 @@ See
 
 (defun xah-clojure-complete-symbol ()
   "Perform keyword completion on current word.
-This uses `ido-mode' user interface for completion."
+This uses `ido-mode' user interface for completion.
+Version 2016-12-18"
   (interactive)
   (let* (
          (-bds (bounds-of-thing-at-point 'symbol))
@@ -712,14 +715,7 @@ This uses `ido-mode' user interface for completion."
     (setq -result-sym
           (ido-completing-read "" xah-clojure-clojure-all-keywords nil nil -current-sym ))
     (delete-region -p1 -p2)
-    (insert -result-sym)
-
-    ;; use case of completion
-
-    (when (not (xah-clojure-start-with-left-paren-p))
-      (let ( (-abbrev-expanded-p (xah-clojure-expand-abbrev)))
-        ;; (when (not (xah-clojure-start-with-left-paren-p)) (xah-clojure-add-paren-around-symbol))
-))))
+    (insert -result-sym)))
 
 (defun xah-clojure-start-with-left-paren-p ()
   "true or false"
@@ -746,21 +742,18 @@ becomes
 Cursor is moved to the left deleted paren spot, mark is set to the right deleted paren spot.
 Call `exchange-point-and-mark' to highlight them.
 “closest outer paren” is based on left side of cursor.
-"
+Version 2016-12-18"
   (interactive)
-  (let ((pos (point))
-        p1 p2
-        )
+  (let ( -pos )
     (atomic-change-group
       (xah-clojure-up-list -1 "ESCAPE-STRINGS" "NO-SYNTAX-CROSSING")
       (while (not (char-equal (char-after) ?\( ))
         (xah-clojure-up-list -1 "ESCAPE-STRINGS" "NO-SYNTAX-CROSSING"))
-      (setq p1 (point))
+      (setq -pos (point))
       (forward-sexp)
-      (setq p2 (point))
       (delete-char -1)
       (push-mark (point) t t)
-      (goto-char p1)
+      (goto-char -pos)
       (delete-char 1))))
 
 (defun xah-clojure-abbrev-enable-function ()
