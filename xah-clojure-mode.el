@@ -703,19 +703,19 @@ This uses `ido-mode' user interface for completion.
 Version 2016-12-18"
   (interactive)
   (let* (
-         (-bds (bounds-of-thing-at-point 'symbol))
-         (-p1 (car -bds))
-         (-p2 (cdr -bds))
-         (-current-sym
-          (if  (or (null -p1) (null -p2) (equal -p1 -p2))
+         ($bds (bounds-of-thing-at-point 'symbol))
+         ($p1 (car $bds))
+         ($p2 (cdr $bds))
+         ($current-sym
+          (if  (or (null $p1) (null $p2) (equal $p1 $p2))
               ""
-            (buffer-substring-no-properties -p1 -p2)))
-         -result-sym)
-    (when (not -current-sym) (setq -current-sym ""))
-    (setq -result-sym
-          (ido-completing-read "" xah-clojure-clojure-all-keywords nil nil -current-sym ))
-    (delete-region -p1 -p2)
-    (insert -result-sym)))
+            (buffer-substring-no-properties $p1 $p2)))
+         $result-sym)
+    (when (not $current-sym) (setq $current-sym ""))
+    (setq $result-sym
+          (ido-completing-read "" xah-clojure-clojure-all-keywords nil nil $current-sym ))
+    (delete-region $p1 $p2)
+    (insert $result-sym)))
 
 (defun xah-clojure-start-with-left-paren-p ()
   "true or false"
@@ -744,24 +744,24 @@ Call `exchange-point-and-mark' to highlight them.
 “closest outer paren” is based on left side of cursor.
 Version 2016-12-18"
   (interactive)
-  (let ( -pos )
+  (let ( $pos )
     (atomic-change-group
       (xah-clojure-up-list -1 "ESCAPE-STRINGS" "NO-SYNTAX-CROSSING")
       (while (not (char-equal (char-after) ?\( ))
         (xah-clojure-up-list -1 "ESCAPE-STRINGS" "NO-SYNTAX-CROSSING"))
-      (setq -pos (point))
+      (setq $pos (point))
       (forward-sexp)
       (delete-char -1)
       (push-mark (point) t t)
-      (goto-char -pos)
+      (goto-char $pos)
       (delete-char 1))))
 
 (defun xah-clojure-abbrev-enable-function ()
   "Return t if not in string or comment. Else nil.
 This is for abbrev table property `:enable-function'.
 Version 2016-10-24"
-  (let ((-syntax-state (syntax-ppss)))
-    (not (or (nth 3 -syntax-state) (nth 4 -syntax-state)))))
+  (let (($syntax-state (syntax-ppss)))
+    (not (or (nth 3 $syntax-state) (nth 4 $syntax-state)))))
 
 (defun xah-clojure-expand-abbrev ()
   "Expand the symbol before cursor,
@@ -771,22 +771,22 @@ Version 2016-10-24"
   (interactive)
   (when (xah-clojure-abbrev-enable-function) ; abbrev property :enable-function doesn't seem to work, so check here instead
     (let (
-          -p1 -p2
-          -abrStr
-          -abrSymbol
+          $p1 $p2
+          $abrStr
+          $abrSymbol
           )
       (save-excursion
         (forward-symbol -1)
-        (setq -p1 (point))
+        (setq $p1 (point))
         (forward-symbol 1)
-        (setq -p2 (point)))
-      (setq -abrStr (buffer-substring-no-properties -p1 -p2))
-      (setq -abrSymbol (abbrev-symbol -abrStr))
-      (if -abrSymbol
+        (setq $p2 (point)))
+      (setq $abrStr (buffer-substring-no-properties $p1 $p2))
+      (setq $abrSymbol (abbrev-symbol $abrStr))
+      (if $abrSymbol
           (progn
-            (abbrev-insert -abrSymbol -abrStr -p1 -p2 )
-            (xah-clojure--abbrev-position-cursor -p1)
-            -abrSymbol)
+            (abbrev-insert $abrSymbol $abrStr $p1 $p2 )
+            (xah-clojure--abbrev-position-cursor $p1)
+            $abrSymbol)
         nil))))
 
 (defun xah-clojure--abbrev-position-cursor (&optional *pos)
@@ -794,9 +794,9 @@ Version 2016-10-24"
 Return true if found, else false.
 Version 2016-10-24"
   (interactive)
-  (let ((-found-p (search-backward "▮" (if *pos *pos (max (point-min) (- (point) 100))) t )))
-    (when -found-p (forward-char ))
-    -found-p
+  (let (($found-p (search-backward "▮" (if *pos *pos (max (point-min) (- (point) 100))) t )))
+    (when $found-p (forward-char ))
+    $found-p
     ))
 
 (defun xah-clojure--ahf ()
@@ -822,8 +822,8 @@ If char before point is letters and char after point is whitespace or punctuatio
   ;; space▮char → do indent
   ;; char▮space → do completion
   ;; char ▮char → do indent
-  (let ( (-syntax-state (syntax-ppss)))
-    (if (or (nth 3 -syntax-state) (nth 4 -syntax-state))
+  (let ( ($syntax-state (syntax-ppss)))
+    (if (or (nth 3 $syntax-state) (nth 4 $syntax-state))
         (progn
           (xah-clojure-prettify-root-sexp))
       (progn (if
@@ -837,29 +837,29 @@ If char before point is letters and char after point is whitespace or punctuatio
 Root sexp group is the outmost sexp unit."
   (interactive)
   (save-excursion
-    (let (-p1 -p2)
+    (let ($p1 $p2)
       (xah-clojure-goto-outmost-bracket)
-      (setq -p1 (point))
-      (setq -p2 (scan-sexps (point) 1))
+      (setq $p1 (point))
+      (setq $p2 (scan-sexps (point) 1))
       (progn
-        (goto-char -p1)
+        (goto-char $p1)
         (indent-sexp)
-        (xah-clojure-compact-parens-region -p1 -p2)))))
+        (xah-clojure-compact-parens-region $p1 $p2)))))
 
 (defun xah-clojure-goto-outmost-bracket (&optional *pos)
   "Move cursor to the beginning of outer-most bracket, with respect to *pos.
 Returns true if point is moved, else false."
   (interactive)
-  (let ((-i 0)
-        (-p0 (if (number-or-marker-p *pos)
+  (let (($i 0)
+        ($p0 (if (number-or-marker-p *pos)
                  *pos
                (point))))
-    (goto-char -p0)
+    (goto-char $p0)
     (while
-        (and (< (setq -i (1+ -i)) 20)
+        (and (< (setq $i (1+ $i)) 20)
              (not (eq (nth 0 (syntax-ppss (point))) 0)))
       (xah-clojure-up-list -1 "ESCAPE-STRINGS" "NO-SYNTAX-CROSSING"))
-    (if (equal -p0 (point))
+    (if (equal $p0 (point))
         nil
       t
       )))
@@ -873,24 +873,24 @@ If there's a text selection, act on the region, else, on defun block."
      (save-excursion
        (xah-clojure-goto-outmost-bracket)
        (list (point) (scan-sexps (point) 1)))))
-  (let ((-p1 *p1) (-p2 *p2))
+  (let (($p1 *p1) ($p2 *p2))
     (when (null *p1)
       (save-excursion
         (xah-clojure-goto-outmost-bracket)
-        (setq -p1 (point))
-        (setq -p2 (scan-sexps (point) 1))))
-    (xah-clojure-compact-parens-region -p1 -p2)))
+        (setq $p1 (point))
+        (setq $p2 (scan-sexps (point) 1))))
+    (xah-clojure-compact-parens-region $p1 $p2)))
 
 (defun xah-clojure-compact-parens-region (*p1 *p2)
   "Remove whitespaces in ending repetition of parenthesises in region."
   (interactive "r")
-  (let (-syntax-state)
+  (let ($syntax-state)
     (save-restriction
       (narrow-to-region *p1 *p2)
       (goto-char (point-min))
       (while (search-forward-regexp ")[ \t\n]+)" nil t)
-        (setq -syntax-state (syntax-ppss (match-beginning 0)))
-        (if (or (nth 3 -syntax-state ) (nth 4 -syntax-state))
+        (setq $syntax-state (syntax-ppss (match-beginning 0)))
+        (if (or (nth 3 $syntax-state ) (nth 4 $syntax-state))
             (progn (search-forward ")"))
           (progn (replace-match "))")
                  (search-backward ")")))))))
