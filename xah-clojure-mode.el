@@ -789,12 +789,12 @@ Version 2016-10-24"
             $abrSymbol)
         nil))))
 
-(defun xah-clojure--abbrev-position-cursor (&optional *pos)
+(defun xah-clojure--abbrev-position-cursor (&optional @pos)
   "Move cursor back to ▮ if exist, else put at end.
 Return true if found, else false.
 Version 2016-10-24"
   (interactive)
-  (let (($found-p (search-backward "▮" (if *pos *pos (max (point-min) (- (point) 100))) t )))
+  (let (($found-p (search-backward "▮" (if @pos @pos (max (point-min) (- (point) 100))) t )))
     (when $found-p (forward-char ))
     $found-p
     ))
@@ -846,13 +846,13 @@ Root sexp group is the outmost sexp unit."
         (indent-sexp)
         (xah-clojure-compact-parens-region $p1 $p2)))))
 
-(defun xah-clojure-goto-outmost-bracket (&optional *pos)
-  "Move cursor to the beginning of outer-most bracket, with respect to *pos.
+(defun xah-clojure-goto-outmost-bracket (&optional @pos)
+  "Move cursor to the beginning of outer-most bracket, with respect to @pos.
 Returns true if point is moved, else false."
   (interactive)
   (let (($i 0)
-        ($p0 (if (number-or-marker-p *pos)
-                 *pos
+        ($p0 (if (number-or-marker-p @pos)
+                 @pos
                (point))))
     (goto-char $p0)
     (while
@@ -864,7 +864,7 @@ Returns true if point is moved, else false."
       t
       )))
 
-(defun xah-clojure-compact-parens (&optional *p1 *p2)
+(defun xah-clojure-compact-parens (&optional @p1 @p2)
   "Remove whitespaces in ending repetition of parenthesises.
 If there's a text selection, act on the region, else, on defun block."
   (interactive
@@ -873,20 +873,20 @@ If there's a text selection, act on the region, else, on defun block."
      (save-excursion
        (xah-clojure-goto-outmost-bracket)
        (list (point) (scan-sexps (point) 1)))))
-  (let (($p1 *p1) ($p2 *p2))
-    (when (null *p1)
+  (let (($p1 @p1) ($p2 @p2))
+    (when (null @p1)
       (save-excursion
         (xah-clojure-goto-outmost-bracket)
         (setq $p1 (point))
         (setq $p2 (scan-sexps (point) 1))))
     (xah-clojure-compact-parens-region $p1 $p2)))
 
-(defun xah-clojure-compact-parens-region (*p1 *p2)
+(defun xah-clojure-compact-parens-region (@p1 @p2)
   "Remove whitespaces in ending repetition of parenthesises in region."
   (interactive "r")
   (let ($syntax-state)
     (save-restriction
-      (narrow-to-region *p1 *p2)
+      (narrow-to-region @p1 @p2)
       (goto-char (point-min))
       (while (search-forward-regexp ")[ \t\n]+)" nil t)
         (setq $syntax-state (syntax-ppss (match-beginning 0)))
@@ -1035,7 +1035,7 @@ If there's a text selection, act on the region, else, on defun block."
 
 
 ;;;###autoload
-(define-derived-mode xah-clojure-mode prog-mode "ξclojure"
+(define-derived-mode xah-clojure-mode prog-mode "∑clojure"
   "A major mode for clojure.
 Most useful command is `xah-clojure-complete-or-indent'.
 Press TAB before word to pretty format (indent).
