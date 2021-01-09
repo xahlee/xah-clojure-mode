@@ -1,11 +1,14 @@
 ;;; xah-clojure-mode.el --- Major mode for editing clojure. -*- coding: utf-8; lexical-binding: t; -*-
 
-;; Copyright © 2014, 2016 by Xah Lee
+;; Copyright © 2013-2020, by Xah Lee
 
-;; Author: Xah Lee <xah@xahlee.org> ( http://xahlee.org/ )
+;; Author: Xah Lee ( http://xahlee.info/ )
+;; Version: 1.1.20210109095358
 ;; Created: 2014-10-31
 ;; Package-Requires: ((emacs "24.1"))
 ;; Keywords: languages, convenience
+
+;; This file is not part of GNU Emacs.
 
 ;; LICENSE:
 ;; paypal me $5
@@ -792,12 +795,9 @@ Version 2016-10-24"
 (defun xah-clojure--abbrev-position-cursor (&optional @pos)
   "Move cursor back to ▮ if exist, else put at end.
 Return true if found, else false.
-Version 2016-10-24"
+Version 2018-06-10"
   (interactive)
-  (let (($found-p (search-backward "▮" (if @pos @pos (max (point-min) (- (point) 100))) t )))
-    (when $found-p (forward-char ))
-    $found-p
-    ))
+  (search-backward "▮" (if @pos @pos (max (point-min) (- (point) 100))) t ))
 
 (defun xah-clojure--ahf ()
   "Abbrev hook function, used for `define-abbrev'.
